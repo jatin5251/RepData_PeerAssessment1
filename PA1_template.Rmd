@@ -55,8 +55,8 @@ Now, using the filled data set, let's make a histogram of the total number of st
 ```{r}
 total.steps <- df1%>%group_by(date)%>%summarise(co=sum(steps,na.rm=TRUE))
 qplot(total.steps$co, binwidth=1000, xlab="total number of steps taken each day")
-mean(total.steps)
-median(total.steps)
+mean(total.steps$co)
+median(total.steps$co)
 ```
 
 Mean and median values are higher after imputing missing data. The reason is
