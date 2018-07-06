@@ -2,8 +2,8 @@
 
 ## Loading and preprocessing the data
 ```{r loaddata}
-unzip(zipfile="activity.zip")
-df <- read.csv("activity.csv")
+unzip(zipfile="/Users/jatin/activity.zip",expdir="/Users/jatin/")
+df <- read.csv("/Users/jatin/activity.csv")
 ```
 
 ## What is mean total number of steps taken per day?
@@ -77,7 +77,7 @@ df$weekendorweekday <- ifelse(weekdays(as.Date(df1$date)) %in% c("Monday", "Tues
 Now, let's make a panel plot containing plots of average number of steps taken
 on weekdays and weekends.
 ```{r}
-sum_int <- df%>%group_by(interval,weekendorweekday)%>%summarise(sumsteps=sum(steps,na.rm=TRUE))
+sum_int <- df%>%group_by(interval,weekendorweekday)%>%summarise(sumsteps=mean(steps,na.rm=TRUE))
 ggplot(sum_int, aes(interval, sumsteps)) + geom_line() + facet_grid(weekendorweekday ~ .) +
   xlab("5-minute interval") + ylab("Number of steps")
 ```
