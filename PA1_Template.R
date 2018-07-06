@@ -41,8 +41,8 @@ df1$steps <- as.numeric(df1$steps)
 ## ------------------------------------------------------------------------
 total.steps <- df1%>%group_by(date)%>%summarise(co=sum(steps,na.rm=TRUE))
 qplot(total.steps$co, binwidth=1000, xlab="total number of steps taken each day")
-mean(total.steps)
-median(total.steps)
+mean(total.steps$co)
+median(total.steps$co)
 
 
 ## ------------------------------------------------------------------------
