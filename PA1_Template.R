@@ -5,6 +5,7 @@ df <- read.csv("activity.csv")
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
+library(dplyr)
 c <- df%>%group_by(date)%>%summarise(co=sum(steps,na.rm=TRUE))
 qplot(c$co, binwidth=1000, xlab="total number of steps taken each day")
 mean(c$co,na.rm=TRUE)
@@ -50,6 +51,6 @@ df$weekendorweekday <- ifelse(weekdays(as.Date(df1$date)) %in% c("Monday", "Tues
 
 
 ## ------------------------------------------------------------------------
-sum_int <- df%>%group_by(interval,weekendorweekday)%>%summarise(sumsteps=sum(steps,na.rm=TRUE))
+sum_int <- df%>%group_by(interval,weekendorweekday)%>%summarise(sumsteps=mean(steps,na.rm=TRUE))
 ggplot(sum_int, aes(interval, sumsteps)) + geom_line() + facet_grid(weekendorweekday ~ .) +
   xlab("5-minute interval") + ylab("Number of steps")
